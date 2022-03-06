@@ -10,7 +10,6 @@ import ru.learnup.vtb.spring.boot.operasales.services.interfaces.Logger;
 import java.util.Map;
 
 @Service
-//@Scope("prototype")
 @Scope("singleton")
 public class OperaService {
 

@@ -3,13 +3,12 @@ package ru.learnup.vtb.spring.boot.operasales.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import ru.learnup.vtb.spring.boot.operasales.annotations.TicketBuyNotified;
 import ru.learnup.vtb.spring.boot.operasales.model.Opera;
-import ru.learnup.vtb.spring.boot.operasales.model.Ticket;
 import ru.learnup.vtb.spring.boot.operasales.services.interfaces.Logger;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 @Service
 @Scope("singleton")
@@ -26,6 +25,7 @@ public class TicketService {
         this.logger = logger;
     }
 
+    @TicketBuyNotified
     public void buyTicket(String operaName, String ticket) {
 
         if (!operaService.getAllOpera().containsKey(operaName)) {
