@@ -1,8 +1,9 @@
 package ru.learnup.vtb.spring.boot.operasales.aspects;
 
-import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
-import org.aspectj.lang.annotation.*;
+import org.aspectj.lang.annotation.Around;
+import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 import ru.learnup.vtb.spring.boot.operasales.model.Opera;
 
@@ -38,7 +39,7 @@ public class NotifierAspect {
     public void aroundOperaAdd(ProceedingJoinPoint point) {
         Object[] args = point.getArgs().clone();
         Opera opera = (Opera) args[0];
-        print("Подготовка анонса #" + opera.getId()  + " для оперы \"" + opera.getName() + "\"");
+        print("Подготовка анонса #" + opera.getId() + " для оперы \"" + opera.getName() + "\"");
 
         try {
             point.proceed();
