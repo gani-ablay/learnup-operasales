@@ -31,6 +31,8 @@ public class OperasalesApplication {
                  1
                 )
         );
+        
+ */
         ctx.getBean(OperaService.class).addOpera(new Opera(null,
                     "Аида",
                 "История любви между Радамесом, предводителем египетских войск, и Аидой, рабыней (а на самом деле, дочерью эфиопского царя, с войсками которого сражались египтяне)",
@@ -38,7 +40,7 @@ public class OperasalesApplication {
                   2
                 )
         );
-*/
+
 
 
         ctx.getBean(TicketService.class).printAvailable("Фауст");
@@ -51,6 +53,7 @@ public class OperasalesApplication {
         ctx.getBean(TicketService.class).printAvailable("Фауст");
 
         ctx.getBean(OperaService.class).printAllOpera();
+        //        ctx.getBean(OperaService.class).deleteOpera("Аида");
 
 
 

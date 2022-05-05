@@ -3,6 +3,9 @@ package ru.learnup.vtb.spring.boot.operasales.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.learnup.vtb.spring.boot.operasales.annotations.TicketBuyNotified;
 import ru.learnup.vtb.spring.boot.operasales.model.Opera;
 import ru.learnup.vtb.spring.boot.operasales.repository.JpaOperaRepository;
@@ -11,6 +14,9 @@ import ru.learnup.vtb.spring.boot.operasales.repository.entities.OperaEntity;
 import ru.learnup.vtb.spring.boot.operasales.repository.entities.TicketEntity;
 import ru.learnup.vtb.spring.boot.operasales.services.interfaces.Logger;
 
+import java.io.EOFException;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -37,6 +43,12 @@ public class TicketService {
 
 
     @TicketBuyNotified
+    @Transactional(
+            propagation = Propagation.REQUIRED,
+            isolation = Isolation.DEFAULT,
+            timeout = 2,
+            rollbackFor = {IllegalArgumentException.class}
+    )
     public void buyTicket(String operaName, String ticket) {
 
         if (operaRepository.getByName(operaName) == null) {
@@ -63,6 +75,12 @@ public class TicketService {
         logger.print("Покупка билета " + ticket + " на оперу \"" + operaName + "\" успешно произведена");
     }
 
+    @Transactional(
+            propagation = Propagation.REQUIRED,
+            isolation = Isolation.DEFAULT,
+            timeout = 2,
+            rollbackFor = {IllegalArgumentException.class}
+    )
     public void returnTicket(String operaName, String ticket) {
 
         if (operaRepository.getByName(operaName) == null) {
